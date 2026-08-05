@@ -44,3 +44,66 @@
 // =============================================================================
 
 
+const readlineSync = require('readline-sync');
+
+function calculateSum(arr) {
+    let sum = 0;
+    for (let i = 0; i < arr.length; i++) {
+        sum += arr[i];
+    }
+    return sum;
+}
+
+function calculateAverage(arr) {
+    if (arr.length === 0) return 0;
+    return calculateSum(arr) / arr.length;
+}
+
+function findMaximum(arr) {
+    let max = arr[0];
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+    }
+    return max;
+}
+
+function findMinimum(arr) {
+    let min = arr[0];
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i] < min) {
+            min = arr[i];
+        }
+    }
+    return min;
+}
+
+function main() {
+    const n = readlineSync.questionInt('How many numbers? ');
+
+    // Validate N
+    if (n <= 0) {
+        console.log('Error: Please enter a positive integer.');
+        return;
+    }
+
+    const numbers = [];
+    for (let i = 0; i < n; i++) {
+        const num = readlineSync.questionInt(`Enter number ${i + 1}: `);
+        numbers.push(num);
+    }
+
+    const sum = calculateSum(numbers);
+    const avg = calculateAverage(numbers);
+    const max = findMaximum(numbers);
+    const min = findMinimum(numbers);
+
+    console.log('\nResults:');
+    console.log(`Sum:     ${sum}`);
+    console.log(`Average: ${avg}`);
+    console.log(`Maximum: ${max}`);
+    console.log(`Minimum: ${min}`);
+}
+
+main();
