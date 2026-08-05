@@ -60,3 +60,49 @@
 // =============================================================================
 
 
+const readlineSync = require('readline-sync');
+
+// PART A: Print single multiplication table
+function printSingleTable(num) {
+    console.log(`\nMultiplication Table for ${num}:`);
+    for (let i = 1; i <= 12; i++) {
+        const product = num * i;
+        // Use padStart to align numbers neatly
+        console.log(`${num.toString().padStart(2)}  x  ${i.toString().padStart(2)}  =  ${product.toString().padStart(3)}`);
+    }
+}
+
+// PART B: Print tables from 1 to N
+function printTablesUpTo(n) {
+    if (n <= 0) {
+        console.log('Error: Please enter a positive integer.');
+        return;
+    }
+
+    for (let i = 1; i <= n; i++) {
+        printSingleTable(i); // Reuse Part A function!
+        
+        // Add separator between tables (but not after the last one)
+        if (i < n) {
+            console.log('---------------------------');
+        }
+    }
+}
+
+function main() {
+    console.log('=== MULTIPLICATION TABLE GENERATOR ===\n');
+
+    // Part A
+    const singleNum = readlineSync.questionInt('Enter a number for single table (Part A): ');
+    if (singleNum > 0) {
+        printSingleTable(singleNum);
+    } else {
+        console.log('Error: Please enter a positive integer.');
+    }
+
+    // Part B
+    const n = readlineSync.questionInt('\nEnter N for multiple tables (Part B): ');
+    printTablesUpTo(n);
+}
+
+main();
